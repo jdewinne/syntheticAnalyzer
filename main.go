@@ -14,6 +14,7 @@ type Query struct {
 
 type Type struct {
 	Name string `xml:"type,attr"`
+    Virtual bool `xml:"virtual,attr"`
 }
 
 func (t Type) String() string {
@@ -34,6 +35,8 @@ func main() {
 	xml.Unmarshal(b, &q)
 
 	for _, xltype := range q.TypeList {
-		fmt.Printf("\t%s\n", xltype)
+        if !xltype.Virtual {
+    		fmt.Printf("\t%s\n", xltype)
+        }
 	}
 }
